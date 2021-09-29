@@ -1,6 +1,8 @@
 package View;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil;
@@ -22,7 +24,7 @@ public class generateRandom {
 	private int paneer_tikka = 100;
 	private String PANEER_TIKKA = "Panner Tikka";
 	private int turkey_meat = 130;
-	private String TURKEY_MEET = "Turkey Meet";
+	private String TURKEY_MEET = "Turkey Meat";
 
 	private int cucumber = 25;
 	private String CUCUMBER = "Cucumber";
@@ -41,7 +43,7 @@ public class generateRandom {
 
 	private int crustchoice;
 	private int fillingchoice;
-	private int toppingchoice;
+	private String toppingchoice;
 
 	public generateRandom() {
 		crust.put(1, HARD);
@@ -90,17 +92,33 @@ public class generateRandom {
 		for (int i = 1; i <= toppings.size(); i++) {
 			System.out.println(i + ") " + toppings.get(i) + "- " + toppingsRate.get(i) + " Rs");
 		}
-		toppingchoice = menu.sc.nextInt();
-		Validate(crustchoice, fillingchoice, toppingchoice);
+		if(toppingchoice == null) {
+		menu.sc.nextLine();
+		}
+		toppingchoice = menu.sc.nextLine();
+		String[] list;
+		list = toppingchoice.split(",");
+		Validate(crustchoice, fillingchoice, list);
 	}
 
-	public void Validate(Integer crustchoice, Integer fillingchoice, int toppingchoice) {
-		if ((fillingchoice == 1 || fillingchoice == 3) && toppingchoice==3) {
-			String err = "  (Meet Stript cannat add to non veg please change!!!)";
+	public void Validate(Integer crustchoice, Integer fillingchoice, String[] list) {
+		String err=null;
+		if(list.length >3 ) {
+			err = "  (Meat Strip are more than 3. Please chnage!)"+" your selection is: " +list.length;
 			optionTopping(crustchoice, fillingchoice, err);
+			return;
+		}
+		
+		for (String  l : list) {
+			if ((fillingchoice == 1 || fillingchoice == 3) && l.equals("3")) {
+				err = "  (Meat Stript cannat add to non veg please change!!!)";
+				optionTopping(crustchoice, fillingchoice, err);
+				break;
+		}
+			
 		}
 		res = new result();
-		res.result(crustchoice, fillingchoice, toppingchoice, crust, crustRate, fillng, fillngRate, toppings,
+		res.result(crustchoice, fillingchoice, list, crust, crustRate, fillng, fillngRate, toppings,
 				toppingsRate);
 	}
 }
