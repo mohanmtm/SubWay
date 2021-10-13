@@ -10,9 +10,9 @@ public class Incrdiples {
 
 	private generateRandom gen;
 	private result res;
-	private int c;
-	private int f;
-	private String[] t;
+	private int crust;
+	private int filling;
+	private String[] topping;
 
 	public Incrdiples() {
 
@@ -28,12 +28,12 @@ public class Incrdiples {
 		Random rand = new Random();
 		int num = 3;
 
-		c = list.get(rand.nextInt(list.size()));
-		f = list.get(rand.nextInt(list.size()));
+		crust = list.get(rand.nextInt(list.size()));
+		filling = list.get(rand.nextInt(list.size()));
 		List<String> list2 = new ArrayList();
 		list2.add("1");
 		list2.add("2");
-		if (!(f == 1 || f == 3)) {
+		if (!(filling == 1 || filling == 3)) {
 			list2.add("3");
 		}
 		list2.add("4");
@@ -45,9 +45,9 @@ public class Incrdiples {
 				newList.add(list2.get(randomIndex));
 			}
 		}
-		t = newList.toArray(new String[newList.size()]);
+		topping = newList.toArray(new String[newList.size()]);
 
 		res = new result();
-		res.result(c, f, t, gen.crust, gen.crustRate, gen.fillng, gen.fillngRate, gen.toppings, gen.toppingsRate);
+		res.result(crust, filling, topping, gen.crust, gen.crustRate, gen.fillng, gen.fillngRate, gen.toppings, gen.toppingsRate);
 	}
 }

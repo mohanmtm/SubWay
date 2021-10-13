@@ -104,7 +104,7 @@ public class generateRandom {
 	public void Validate(Integer crustchoice, Integer fillingchoice, String[] list) {
 		String err=null;
 		if(list.length >3 ) {
-			err = "  (Meat Strip are more than 3. Please chnage!)"+" your selection is: " +list.length;
+			err = "  (Your toppings are more than 3. Please correct!)"+" your selection is: " +list.length;
 			optionTopping(crustchoice, fillingchoice, err);
 			return;
 		}

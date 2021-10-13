@@ -11,22 +11,22 @@ public class result {
 	MenuView menu;
 	private static final String inv_sub = "Invoice for Sub";
 
-	public void result(Integer c, Integer f, String[] t, Map<Integer, String> crust, Map<Integer, Integer> crustRate,
+	public void result(Integer crustSize, Integer fillingSize, String[] toppingSize, Map<Integer, String> crust, Map<Integer, Integer> crustRate,
 			Map<Integer, String> fillings, Map<Integer, Integer> fillingsRate, Map<Integer, String> topping,
 			Map<Integer, Integer> toppingRate) {
 		System.out.println(inv_sub);
-		int tt = 0;
+		int toppingTotal = 0;
 
-		System.out.println("Crust - " + crust.get(c) + " - " + crustRate.get(c) + " Rs");
-		System.out.println("Filling - " + fillings.get(c) + " - " + fillingsRate.get(f) + " Rs");
+		System.out.println("Crust - " + crust.get(crustSize) + " - " + crustRate.get(crustSize) + " Rs");
+		System.out.println("Filling - " + fillings.get(crustSize) + " - " + fillingsRate.get(fillingSize) + " Rs");
 		int lowPrice = 0;
-		if (t.length > 2) {
-			int a[] = { toppingRate.get(Integer.parseInt(t[0])), toppingRate.get(Integer.parseInt(t[1])), toppingRate.get(Integer.parseInt(t[2])) };
-			Arrays.sort(a);
-			lowPrice = a[0];
+		if (toppingSize.length > 2) {
+			int allToopings[] = { toppingRate.get(Integer.parseInt(toppingSize[0])), toppingRate.get(Integer.parseInt(toppingSize[1])), toppingRate.get(Integer.parseInt(toppingSize[2])) };
+			Arrays.sort(allToopings);
+			lowPrice = allToopings[0];
 		}
 		boolean check = false;
-		for (String top : t) {
+		for (String top : toppingSize) {
 			if(!check && (lowPrice == toppingRate.get(Integer.parseInt(top)))) {
 				check = true;
 				System.out.println("Topping - " + topping.get(Integer.parseInt(top)) + " - "
@@ -34,11 +34,11 @@ public class result {
 			}else {
 			System.out.println("Topping - " + topping.get(Integer.parseInt(top)) + " - "
 					+ toppingRate.get(Integer.parseInt(top)) + " Rs");
-			tt += toppingRate.get(Integer.parseInt(top));
+			toppingTotal += toppingRate.get(Integer.parseInt(top));
 			}
 		}
 
-		total = crustRate.get(c) + fillingsRate.get(f) + tt;
+		total = crustRate.get(crustSize) + fillingsRate.get(fillingSize) + toppingTotal;
 		System.out.println("Total - " + total + " Rs");
 
 		showReust(total);
